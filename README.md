@@ -561,41 +561,7 @@ dnf -y install authselect
 
 ### 5.2 Kerberos Configuration
 
-**Create `/etc/krb5.conf`:**
-```bash
-cat > /etc/krb5.conf << 'EOF'
-includedir /etc/krb5.conf.d/
-includedir /var/lib/sss/pubconf/krb5.include.d/
-
-[logging]
-default = FILE:/var/log/krb5libs.log
-kdc = FILE:/var/log/krb5kdc.log
-admin_server = FILE:/var/log/kadmind.log
-
-[libdefaults]
-dns_lookup_realm = true
-ticket_lifetime = 24h
-renew_lifetime = 7d
-forwardable = true
-rdns = false
-pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
-default_ccache_name = KEYRING:persistent:%{uid}
-default_realm = GONDOR.RICHMOND.EDU
-dns_lookup_kdc = true
-
-[realms]
-GONDOR.RICHMOND.EDU = {
-    kdc = kdc1.richmond.edu
-    admin_server = kdc1.richmond.edu
-}
-
-[domain_realm]
-richmond.edu = GONDOR.RICHMOND.EDU
-.richmond.edu = GONDOR.RICHMOND.EDU
-gondor.richmond.edu = GONDOR.RICHMOND.EDU
-.gondor.richmond.edu = GONDOR.RICHMOND.EDU
-EOF
-```
+**Get the `/etc/krb5.conf` from another workstation:**
 
 **Set permissions:**
 ```bash
@@ -605,37 +571,7 @@ chmod 0644 /etc/krb5.conf
 
 ### 5.3 SSSD Configuration
 
-**Create `/etc/sssd/sssd.conf`:**
-```bash
-cat > /etc/sssd/sssd.conf << 'EOF'
-[domain/default]
-autofs_provider = ldap
-cache_credentials = True
-krb5_kpasswd = GONDOR.richmond.edu
-ldap_search_base = ou=people,dc=richmond,dc=edu
-krb5_server = kdc1.richmond.edu,kdc2.richmond.edu
-id_provider = ldap
-auth_provider = krb5
-chpass_provider = krb5
-krb5_store_password_if_offline = True
-ldap_uri = ldap://ldap.richmond.edu
-krb5_realm = GONDOR.RICHMOND.EDU
-ldap_tls_cacertdir = /etc/pki/tls/certs
-ldap_group_search_base = ou=posixgroups,dc=richmond,dc=edu
-ldap_default_bind_dn = cn=nameservice,ou=people,dc=richmond,dc=edu
-ldap_default_authtok_type = password
-ldap_default_authtok = nsswitch00
-ldap_tls_reqcert = allow
-ldap_tls_cacert = /etc/pki/tls/certs/ca-bundle.crt
-
-[sssd]
-services = nss, pam, autofs
-domains = default
-
-[nss]
-homedir_substring = /home
-EOF
-```
+**Get the `/etc/sssd/sssd.conf` from another workstation:**
 
 **Set permissions:**
 ```bash
