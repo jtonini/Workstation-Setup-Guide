@@ -548,6 +548,39 @@ sed -i '1i # Exit if not running interactively\n[ -z "$PS1" ] && return\n' /root
 sed -i '1i # Exit if not running interactively\n[ -z "$PS1" ] && return\n' /etc/skel/.bashrc
 ```
 
+### 4.8 Configure Shared Filesystems
+
+**Set up /scratch for multi-user access:**
+```bash
+# Set sticky bit + world-writable permissions
+# 1777 = sticky bit (users can only delete their own files) + rwxrwxrwx
+chmod 1777 /scratch
+
+# Verify permissions
+ls -ld /scratch
+# Should show: drwxrwxrwt 2 root root ... /scratch
+```
+
+**The sticky bit (1777) ensures:**
+- All users can create files/directories in `/scratch`
+- Users can only delete their own files
+- Prevents accidental deletion of other users' computation data
+
+**Optional: Set up quota warnings** (if disk quotas are needed):
+```bash
+# Create a README for users
+cat > /scratch/README << 'EOF'
+/scratch - Temporary Computation Space
+
+- This is for temporary computation data only
+- Files older than 30 days may be automatically deleted
+- Back up important results to your home directory
+- DO NOT store final results here permanently
+EOF
+
+chmod 644 /scratch/README
+```
+
 ---
 
 ## 5. Authentication Setup
