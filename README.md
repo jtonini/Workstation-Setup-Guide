@@ -736,6 +736,13 @@ cat >> /etc/fstab << 'EOF'
 EOF
 ```
 
+**Columbus chemistry software symlink:**
+```bash
+mkdir -p /usr/local/columbus/Col7.2.2_2023-09-06_linux64.ifc_bin
+cd /usr/local/columbus/Col7.2.2_2023-09-06_linux64.ifc_bin
+ln -s /usr/local/chem.sw/Columbus Columbus
+```
+
 **Mount now:**
 ```bash
 mount -av
@@ -752,13 +759,6 @@ rm -fr bin etc games include lib lib64 libexec sbin src
 for f in $(ls -1 chem.sw); do 
     ln -s "chem.sw/$f" "$f"
 done
-```
-
-**Columbus chemistry software symlink:**
-```bash
-mkdir -p /usr/local/columbus/Col7.2.2_2023-09-06_linux64.ifc_bin
-cd /usr/local/columbus/Col7.2.2_2023-09-06_linux64.ifc_bin
-ln -s /usr/local/chem.sw/Columbus Columbus
 ```
 
 ### 6.5 Legacy Library Compatibility
