@@ -470,11 +470,6 @@ Change to:
 %wheel        ALL=(ALL)       NOPASSWD: ALL
 ```
 
-**Add your administrative user to wheel group:**
-```bash
-sudo usermod -aG wheel yourusername
-```
-
 **For remaining operations, switch to root:**
 ```bash
 su root
