@@ -687,6 +687,7 @@ dnf -y install unzip
 dnf -y install screen
 dnf -y install bc
 dnf -y install expect
+dnf -y install tcsh
 dnf -y install kitty  # Modern terminal emulator
 ```
 
