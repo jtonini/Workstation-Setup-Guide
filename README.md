@@ -1111,6 +1111,10 @@ for user in /home/*; do
 done
 ```
 
+# TO DO 
+# add all users should be members of the same groups
+
+
 ### 8.3 Create New Users
 
 **Using wstools (recommended):**
