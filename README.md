@@ -1074,7 +1074,6 @@ HOSTNAME=$(hostname -s)
 
 # Start restore in screen session
 screen -dmS restore bash -c "rsync -avhP \
-  --exclude='scr/' \
   --exclude='nohup.out' \
   --exclude='*_macro' \
   franksinatra:/mnt/everything/backup-testing/${HOSTNAME}/ \
