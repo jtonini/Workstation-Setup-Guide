@@ -1111,9 +1111,11 @@ for user in /home/*; do
 done
 ```
 
-# TO DO 
-# add all users should be members of the same groups
-
+**Using wstools.bash** 
+```bash
+# from the machine
+all_users_to_group users
+```
 
 ### 8.3 Create New Users
 
