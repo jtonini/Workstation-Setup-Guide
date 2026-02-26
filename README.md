@@ -689,6 +689,8 @@ dnf -y install bc
 dnf -y install expect
 dnf -y install tcsh
 dnf -y install kitty  # Modern terminal emulator
+dnf -y install nfs-utils
+dnf -y install rpcbind
 ```
 
 **Scientific computing:**
