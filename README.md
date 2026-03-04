@@ -782,6 +782,28 @@ ln -s libffi.so.8 libffi.so.6.0
 ls -la /usr/lib64/libffi*
 ```
 
+### 6.6 Application Library Dependencies
+
+**Amber24 requires libraries from its own install and from system packages:**
+```bash
+# Install system libraries needed by Amber/other chemistry software
+dnf install -y netcdf-fortran arpack openblas-serial
+
+# netcdff version compatibility (Amber24 expects .so.6, Rocky 10 ships .so.7)
+ln -s /usr/lib64/libnetcdff.so.7 /usr/lib64/libnetcdff.so.6
+
+# Add Amber24 library path (provides libemil.so, libkmmd.so)
+echo "/usr/local/chem.sw/amber24/lib" > /etc/ld.so.conf.d/amber24.conf
+ldconfig
+```
+
+**Verify all dependencies resolve:**
+```bash
+ldd /usr/local/amber24/bin/pmemd.cuda_SPFP 2>&1 | grep "not found"
+# Should return nothing
+```
+
+That covers everything we hit today. Want me to produce the updated file?
 ---
 
 ## 7. GPU and CUDA Setup
