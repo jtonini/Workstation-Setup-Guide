@@ -1145,6 +1145,28 @@ all_users_to_group users
 
 ### 8.3 Create New Users
 
+**Prerequisites - Setup Template Files:**
+
+Before creating users, ensure user account template files exist on all workstations:
+
+```bash
+# From jonimitchell, push template files to all workstations (run once during initial setup)
+for host in $my_computers; do
+    echo "Copying templates to $host..."
+    scp /home/zeus/bashrc root@$host:/root/bashrc
+    scp /home/zeus/bash_profile root@$host:/root/bash_profile
+    scp /home/zeus/cshrc root@$host:/root/cshrc
+done
+
+# Verify templates exist on all workstations
+on_all_computers "ls -la /root/bashrc /root/bash_profile /root/cshrc"
+```
+
+These template files are required for the `newuser` function to create proper shell configurations:
+- `/root/bashrc` → copied to new user's `.bashrc`
+- `/root/bash_profile` → copied to new user's `.bash_profile`
+- `/root/cshrc` → copied to new user's `.cshrc`
+
 **Using wstools (recommended):**
 ```bash
 # Clone wstools repository
@@ -1173,6 +1195,8 @@ newusers_remote hostname netid1 netid2
 # Add users to all machines
 newusers_remote all netid1 netid2
 ```
+
+**Note:** The template files only need to be deployed once during workstation setup, not before each user creation.
 
 **Manual user creation:**
 ```bash
