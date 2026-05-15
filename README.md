@@ -805,9 +805,6 @@ ldd /usr/local/amber24/bin/pmemd.cuda_SPFP 2>&1 | grep "not found"
 # Should return nothing
 ```
 
-That covers everything we hit today. Want me to produce the updated file?
----
-
 ## 7. GPU and CUDA Setup
 
 ### 7.1 Identify GPU Hardware
