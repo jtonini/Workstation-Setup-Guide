@@ -691,8 +691,8 @@ dnf -y install tcsh
 dnf -y install kitty  # Modern terminal emulator
 dnf -y install nfs-utils
 dnf -y install rpcbind
-dnf install motif motif-devel
-dnf install xauth
+dnf -y install motif motif-devel
+dnf -y install xauth
 ```
 
 **Scientific computing:**
